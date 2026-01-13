@@ -93,6 +93,11 @@ download_server() {
       return 1
     }
     
+    # Check if authentication was successful by looking for credentials file
+    if [ -f "$HOME/.hytale-downloader-credentials.json" ]; then
+      LogSuccess "Hytale Authentication Successful"
+    fi
+    
     # Extract the new files
     LogInfo "Extracting server files..."
     cd "$SERVER_FILES" || exit 1
@@ -137,6 +142,11 @@ download_server() {
       LogError "Failed to download server files"
       return 1
     }
+    
+    # Check if authentication was successful by looking for credentials file
+    if [ -f "$HOME/.hytale-downloader-credentials.json" ]; then
+      LogSuccess "Hytale Authentication Successful"
+    fi
     
     # Extract the files
     LogInfo "Extracting server files..."
