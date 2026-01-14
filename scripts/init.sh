@@ -16,6 +16,31 @@ chown -R ${PUID}:${PGID} /home/hytale/server-files /home/hytale/
 
 cat /branding
 
+# Set up persistent machine-id for encrypted auth
+SERVER_FILES="/home/hytale/server-files"
+MACHINE_ID_DIR="$SERVER_FILES/.machine-id"
+mkdir -p "$MACHINE_ID_DIR"
+
+if [ ! -f "$MACHINE_ID_DIR/uuid" ]; then
+    LogInfo "Generating persistent machine-id for encrypted auth..."
+    MACHINE_UUID=$(cat /proc/sys/kernel/random/uuid)
+    MACHINE_UUID_NO_DASH=$(echo "$MACHINE_UUID" | tr -d '-' | tr '[:upper:]' '[:lower:]')
+    
+    echo "$MACHINE_UUID_NO_DASH" > "$MACHINE_ID_DIR/machine-id"
+    echo "$MACHINE_UUID_NO_DASH" > "$MACHINE_ID_DIR/dbus-machine-id"
+    echo "$MACHINE_UUID" > "$MACHINE_ID_DIR/product_uuid"
+    echo "$MACHINE_UUID" > "$MACHINE_ID_DIR/uuid"
+    
+    chown -R ${PUID}:${PGID} "$MACHINE_ID_DIR"
+fi
+
+# Copy to system locations
+cp "$MACHINE_ID_DIR/machine-id" /etc/machine-id
+mkdir -p /var/lib/dbus
+cp "$MACHINE_ID_DIR/dbus-machine-id" /var/lib/dbus/machine-id
+
+LogInfo "Machine ID configured for encrypted auth persistence"
+
 if [ "${DOWNLOAD_ON_START:-true}" = "true" ]; then
     download_server
 else
