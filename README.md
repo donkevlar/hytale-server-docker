@@ -3,15 +3,6 @@ This is a fork of indifferent broccoli hytale server, the purpose of this fork i
 
 [![GitHub License](https://img.shields.io/github/license/indifferentbroccoli/hytale-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/hytale-server-docker/blob/main/LICENSE)
 
-
-Game server hosting
-
-Fast RAM, high-speed internet
-
-Eat lag for breakfast
-
-[Try our Hytale server hosting free for 2 days!](https://indifferentbroccoli.com/hytale-server-hosting)
-
 ## Hytale Dedicated Server Docker
 
 A Docker container for running a Hytale dedicated server with automatic downloading and updates using the official Hytale Downloader CLI.
