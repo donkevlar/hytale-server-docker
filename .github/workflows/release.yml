@@ -4,7 +4,8 @@ on:
     types:
       - published
 jobs:
-  push:
+  release:
+    name: Release - Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,11 +23,15 @@ jobs:
         with:
           images: |
             ${{ github.repository }}
-          tags: 'type=raw,value=latest'
+          tags: |
+            type=semver,pattern=v{{version}}
+            type=semver,pattern=v{{major}}.{{minor}}
+            type=semver,pattern=v{{major}}
           flavor: latest=true
       - name: Docker - Build / Push
+        id: docker_build
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64
+          platforms: 'linux/amd64'
           push: true
           tags: '${{ steps.meta.outputs.tags }}'
