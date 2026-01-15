@@ -1,5 +1,5 @@
 <!-- markdownlint-disable-next-line -->
-This is a fork based of indifferent broccoli hytale server, the purpose of this fork is to host it on unraid. 
+This is a fork of indifferent broccoli hytale server, the purpose of this fork is to host it on unraid. 
 
 [![GitHub License](https://img.shields.io/github/license/indifferentbroccoli/hytale-server-docker?style=for-the-badge&color=6aa84f)](https://github.com/indifferentbroccoli/hytale-server-docker/blob/main/LICENSE)
 
